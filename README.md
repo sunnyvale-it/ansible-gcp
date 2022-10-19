@@ -1,8 +1,5 @@
 # Using Ansible with Google Cloud Platform inventory source 
 
-Ansible script
-
-
 Check if Ansible **google.cloud** plugin collection is already installed
 
 ```console
@@ -15,6 +12,14 @@ If not install the Ansible **google.cloud** plugin collection
 
 ```console
 $ ansible-galaxy collection install google.cloud
+```
+
+Before proceeding, open the [misc/inventory.gcp.yml](misc/inventory.gcp.yml) file and change the following params, according to your environment:
+
+```yaml
+projects:
+  - myproj
+service_account_file: credentials.json
 ```
 
 Test the inventory creation
