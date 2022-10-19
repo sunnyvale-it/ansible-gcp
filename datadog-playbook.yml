@@ -1,0 +1,17 @@
+- name: Install Datadog Agent
+  hosts: all
+  tasks:
+    - name: Container present
+      when: ansible_facts['os_family'] == "Container-Optimized OS" # and hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == "10.205.249.200"
+      include_tasks: cos-datadog-playbook.yaml
+      tags:
+        - linux
+        - cos
+    - name: Container present
+      when: ansible_facts['os_family'] == "Debian" # and hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == "10.205.249.200"
+      include_tasks: debian-datadog-playbook.yaml
+      tags:
+        - linux
+        - debian
+    
+        

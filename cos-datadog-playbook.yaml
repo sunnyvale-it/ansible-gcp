@@ -1,0 +1,39 @@
+
+- name: Download Python PIP
+  command: curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o /tmp/get-pip.py
+  tags:
+    - linux
+    - cos
+- name: Install Python PIP
+  command: python /tmp/get-pip.py
+  tags:
+    - linux
+    - cos
+- name: Install Python Docker module
+  ansible.builtin.pip:
+      name: docker
+  tags:
+    - linux
+    - cos
+- name: Install datadog Agent on Google COS
+  docker_container:
+   name: dd-agent
+   state: started
+   image: gcr.io/datadoghq/agent:7
+   pid_mode: host
+   privileged: yes
+   volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    - /etc/os-release:/host/etc/os-release:ro
+   env:
+    DD_API_KEY: 
+    DD_SITE: datadoghq.eu
+    DD_ENV: uat
+    DD_TAGS: "team:bmit" 
+    DD_SERVICE: "bmit-file-transfer-scheduler"
+  tags:
+    - linux
+    - cos
+   
