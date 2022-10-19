@@ -1,9 +1,9 @@
 plugin: gcp_compute
 projects:
-  - file-transfer-sched-uat
+  - myproj
 auth_kind: serviceaccount
 cache: false
-service_account_file: ansible-file-transfer-sched-uat-db32633292a9.json
+service_account_file: credentials.json
 keyed_groups:
   - key: labels
     prefix: label
