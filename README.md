@@ -1,4 +1,5 @@
-# tmit-ansible
+# Using Ansible with Google Cloud Platform inventory source 
+
 Ansible script
 
 
