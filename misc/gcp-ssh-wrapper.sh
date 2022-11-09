@@ -21,4 +21,4 @@ done
 export service_account_file=$(pwd)/$(grep service_account_file misc/inventory.gcp.yml | cut -d : -f 2 | sed -e 's/ //g' | sed -e 's/\n//g')
 export CLOUDSDK_PYTHON_SITEPACKAGES=1
 export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE="${service_account_file}"
-gcloud compute ssh $opts "${host}" -- -C "${cmd}"
+gcloud compute ssh --ssh-flag='-T' $opts "${host}" -- -C "${cmd}"
